@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>点茶雅集</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('https://example.com/tea_bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: "Microsoft YaHei", sans-serif;
+            touch-action: manipulation;
+            overflow: hidden;
+        }
+        #game-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+        #tea-bowl {
+            width: 200px;
+            height: 150px;
+            background: rgba(240, 240, 235, 0.8);
+            border-radius: 0 0 100px 100px;
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            transform: translateX(-50%);
+            border: 2px solid #333;
+            overflow: hidden;
+        }
+        #tea-liquid {
+            width: 100%;
+            height: 0;
+            background: #8B4513;
+            position: absolute;
+            bottom: 0;
+            transition: height 0.5s;
+        }
+        /* 其他样式... */
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="tea-bowl">
+            <div id="tea-liquid"></div>
+        </div>
+        <div id="instructions" style="position: absolute; top: 20px; width: 100%; text-align: center; color: white; text-shadow: 1px 1px 2px black;"></div>
+        <!-- 其他游戏元素 -->
+    </div>
+
+    <script>
+        // 简化版游戏逻辑
+        const gameStates = ["INTRO", "SELECT_TEA", "HEAT_WATER", "SCOOP_POWDER", "POUR_WATER", "WHISK_TEA", "FINISH"];
+        let currentState = 0;
+        let teaType = null;
+        let waterLevel = 0;
+        
+        function updateGame() {
+            const instructions = document.getElementById('instructions');
+            const teaLiquid = document.getElementById('tea-liquid');
+            
+            teaLiquid.style.height = waterLevel + '%';
+            
+            switch(gameStates[currentState]) {
+                case "INTRO":
+                    instructions.innerHTML = "欢迎来到点茶雅集，点击开始";
+                    break;
+                // 其他状态处理...
+            }
+        }
+        
+        // 点击事件处理
+        document.addEventListener('click', function() {
+            if(gameStates[currentState] === "INTRO") {
+                currentState++;
+                updateGame();
+            }
+            // 其他状态处理...
+        });
+        
+        updateGame();
+    </script>
+</body>
+</html>
